@@ -39,11 +39,10 @@ function App() {
 
   const loadQuestions = (data: Question[]) => {
     const shuffledQuestions = shuffleArray(data);
+
     const shuffledQuestionsWithAnswers = shuffledQuestions.map((question) => {
-      const shuffledAnswers = shuffleArray(Object.entries(question.respuestas));
       return {
         ...question,
-        respuestas: Object.fromEntries(shuffledAnswers),
       };
     });
 
@@ -72,6 +71,7 @@ function App() {
     setAnswers({});
     setScore(null);
     setChecked(false);
+    setQuestions((prevQuestions) => shuffleArray(prevQuestions));
     window.scrollTo(0, 0);
   };
 
@@ -82,7 +82,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="container">
       <h1>Quiz Test</h1>
 
       <div>
