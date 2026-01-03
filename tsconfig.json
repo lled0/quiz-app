@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "types": ["jest"],
+    "lib": ["dom", "es2019"]
+  },
+  "include": [
+    "src/**/*",
+    "src/setupTests.ts"
+  ]
+}
