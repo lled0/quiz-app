@@ -76,21 +76,27 @@ const Quiz: React.FC = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Quiz Test</h1>
+    <div className="font-sans bg-gray-100 min-h-screen flex flex-col items-center p-5">
+      <h1 className="text-blue-500 text-4xl text-center">Quiz Test</h1>
 
-      <div>
+      <div className="py-5">
         {!fileName ? (
           <input
             type="file"
             accept="application/json"
             onChange={handleFileUpload}
             data-testid="file-input"
+            className="py-2 px-4 bg-white border rounded-lg"
           />
         ) : (
-          <div className="file-container">
+          <div className="flex gap-2 items-center">
             <p>Fichero subido: {fileName}</p>
-            <button onClick={resetFile}>Reset Fichero</button>
+            <button
+              onClick={resetFile}
+              className="bg-blue-500 text-white py-2 px-6 rounded-lg"
+            >
+              Reset Fichero
+            </button>
           </div>
         )}
       </div>
@@ -107,16 +113,24 @@ const Quiz: React.FC = () => {
               checked={score !== null}
             />
           ))}
-          <div className="button-container">
-            <button onClick={checkAnswers} disabled={score !== null}>
+          <div className="flex gap-2 items-center mt-4">
+            <button
+              onClick={checkAnswers}
+              disabled={score !== null}
+              className="bg-blue-500 text-white py-3 px-6 rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
+            >
               Comprobar Respuestas
             </button>
-            <button onClick={resetTest} disabled={score === null}>
+            <button
+              onClick={resetTest}
+              disabled={score === null}
+              className="bg-blue-500 text-white py-3 px-6 rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed"
+            >
               Reset Test
             </button>
             {score !== null && (
               <div>
-                <h2>
+                <h2 className="text-xl text-gray-800 mt-4 text-center">
                   Puntuación: {score} de {questions.length}
                 </h2>
               </div>
