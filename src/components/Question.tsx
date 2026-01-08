@@ -25,12 +25,16 @@ const Question: React.FC<QuestionProps> = ({
     if (key === selectedAnswer) {
       return key === question.correcta ? "bg-green-500" : "bg-red-500";
     }
+
+    if (key === question.correcta) {
+      return "bg-green-500";
+    }
     return "";
   };
 
   return (
-    <div className="bg-white rounded-lg p-5 mb-4 shadow-lg">
-      <h3 className="text-lg mb-3">
+    <div className="mb-4 rounded-lg bg-white p-5 shadow-lg">
+      <h3 className="mb-3 text-lg">
         {index + 1}. {question.pregunta}
       </h3>
       <div className="flex flex-col">
