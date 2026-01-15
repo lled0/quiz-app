@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import Question from "./Question";
 import { QuestionQuiz } from "./Quiz";
 import ProgressBar from "./ProgressBar";
+import QuestionTransition from "./QuestionTransition";
 
 interface StepByStepQuizProps {
   questions: QuestionQuiz[];
@@ -42,14 +43,17 @@ const StepByStepQuiz: React.FC<StepByStepQuizProps> = ({
         total={questions.length}
       />
 
-      <Question
-        key={questions[currentQuestionIndex].pregunta}
-        question={questions[currentQuestionIndex]}
-        index={currentQuestionIndex}
-        selectedAnswer={answers[currentQuestionIndex] || ""}
-        onAnswerChange={onAnswerChange}
-        checked={hasAnsweredCurrent}
-      />
+      <QuestionTransition animationKey={currentQuestionIndex}>
+        <div className="min-h-[320px]">
+          <Question
+            question={questions[currentQuestionIndex]}
+            index={currentQuestionIndex}
+            selectedAnswer={answers[currentQuestionIndex] || ""}
+            onAnswerChange={onAnswerChange}
+            checked={hasAnsweredCurrent}
+          />
+        </div>
+      </QuestionTransition>
 
       <div className="mt-4 flex justify-center">
         {hasAnsweredCurrent && !isLastQuestion && (
