@@ -3,6 +3,7 @@ import Question from "./Question";
 import { QuestionQuiz } from "./Quiz";
 import ProgressBar from "./ProgressBar";
 import QuestionTransition from "./QuestionTransition";
+import AnswerProgressBar from "./AnswerProgressBar";
 
 interface StepByStepQuizProps {
   questions: QuestionQuiz[];
@@ -26,6 +27,14 @@ const StepByStepQuiz: React.FC<StepByStepQuizProps> = ({
     return questions.filter((q, index) => answers[index] === q.correcta).length;
   }, [answers, questions]);
 
+  const correctCount = questions.filter(
+    (q, i) => answers[i] === q.correcta
+  ).length;
+
+  const wrongCount = questions.filter(
+    (q, i) => answers[i] !== undefined && answers[i] !== q.correcta
+  ).length;
+
   const goToNextQuestion = () => {
     if (!isLastQuestion) {
       setCurrentQuestionIndex((prev) => prev + 1);
@@ -41,6 +50,12 @@ const StepByStepQuiz: React.FC<StepByStepQuizProps> = ({
       <ProgressBar
         current={currentQuestionIndex + 1}
         total={questions.length}
+      />
+
+      <AnswerProgressBar
+        questionsTotal={questions.length}
+        correctCount={correctCount}
+        wrongCount={wrongCount}
       />
 
       <QuestionTransition animationKey={currentQuestionIndex}>
