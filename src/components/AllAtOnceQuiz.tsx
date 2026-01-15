@@ -1,6 +1,7 @@
 import React from "react";
 import Question from "./Question";
 import { QuestionQuiz } from "./Quiz";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 interface AllAtOnceQuizProps {
   questions: QuestionQuiz[];
@@ -50,11 +51,13 @@ const AllAtOnceQuiz: React.FC<AllAtOnceQuizProps> = ({
         </button>
 
         {score !== null && (
-          <h2 className="mt-4 text-xl">
+          <h2 className="text-xl">
             Puntuación: {score} de {questions.length}
           </h2>
         )}
       </div>
+
+      <ScrollToTopButton />
     </>
   );
 };
