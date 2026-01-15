@@ -59,8 +59,14 @@ const Question: React.FC<QuestionProps> = ({
             />
             <label
               htmlFor={`q${index}_${key}`}
-              className={`cursor-pointer text-base block ${
-                selectedAnswer === key
+              className={`cursor-pointer text-base block transition-colors duration-300 ${
+                checked
+                  ? key === question.correcta
+                    ? "text-white"
+                    : key === selectedAnswer
+                    ? "text-white"
+                    : "text-gray-800"
+                  : selectedAnswer === key
                   ? "text-blue-500 font-bold"
                   : "text-gray-800"
               }`}
