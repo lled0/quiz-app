@@ -68,7 +68,7 @@ const StepByStepQuiz: React.FC<StepByStepQuizProps> = ({
         {hasAnsweredCurrent && isLastQuestion && (
           <button
             onClick={showAllQuestions}
-            className="rounded-lg bg-green-500 px-6 py-2 text-white"
+            className="rounded-lg bg-blue-500 px-6 py-2 text-white"
           >
             Mostrar todas
           </button>
