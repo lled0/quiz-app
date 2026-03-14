@@ -24,7 +24,7 @@ const AllAtOnceQuiz: React.FC<AllAtOnceQuizProps> = ({
     <>
       {questions.map((question, index) => (
         <Question
-          key={question.pregunta}
+          key={index}
           question={question}
           index={index}
           selectedAnswer={answers[index] || ""}

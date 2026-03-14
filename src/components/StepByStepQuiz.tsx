@@ -27,10 +27,6 @@ const StepByStepQuiz: React.FC<StepByStepQuizProps> = ({
     return questions.filter((q, index) => answers[index] === q.correcta).length;
   }, [answers, questions]);
 
-  const correctCount = questions.filter(
-    (q, i) => answers[i] === q.correcta
-  ).length;
-
   const wrongCount = questions.filter(
     (q, i) => answers[i] !== undefined && answers[i] !== q.correcta
   ).length;
@@ -54,7 +50,7 @@ const StepByStepQuiz: React.FC<StepByStepQuizProps> = ({
 
       <AnswerProgressBar
         questionsTotal={questions.length}
-        correctCount={correctCount}
+        correctCount={score}
         wrongCount={wrongCount}
       />
 
@@ -96,7 +92,7 @@ const StepByStepQuiz: React.FC<StepByStepQuizProps> = ({
     <>
       {questions.map((question, index) => (
         <Question
-          key={question.pregunta}
+          key={index}
           question={question}
           index={index}
           selectedAnswer={answers[index] || ""}
