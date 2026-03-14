@@ -43,11 +43,29 @@ const Quiz: React.FC = () => {
   };
 
   const shuffleArray = <T,>(array: T[]): T[] => {
-    return [...array].sort(() => Math.random() - 0.5);
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  };
+
+  const shuffleOptions = (question: QuestionQuiz): QuestionQuiz => {
+    const entries = Object.entries(question.respuestas);
+    const correctEntry = entries.find(([k]) => k === question.correcta)!;
+    const shuffledEntries = shuffleArray(entries);
+    const keys = Object.keys(question.respuestas);
+    const newRespuestas: Record<string, string> = {};
+    keys.forEach((key, i) => {
+      newRespuestas[key] = shuffledEntries[i][1];
+    });
+    const newCorrecta = keys[shuffledEntries.indexOf(correctEntry)];
+    return { ...question, respuestas: newRespuestas, correcta: newCorrecta };
   };
 
   const loadQuestions = (data: QuestionQuiz[]) => {
-    setQuestions(shuffleArray(data));
+    setQuestions(shuffleArray(data).map(shuffleOptions));
     setAnswers({});
     setScore(null);
   };
@@ -69,7 +87,7 @@ const Quiz: React.FC = () => {
   const resetTest = () => {
     setAnswers({});
     setScore(null);
-    setQuestions(shuffleArray(questions));
+    setQuestions(shuffleArray(questions).map(shuffleOptions));
     window.scrollTo(0, 0);
   };
 
